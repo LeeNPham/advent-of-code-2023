@@ -6,52 +6,11 @@ class Day01 extends Problem {
   }
 
   solvePart1() {
-    const maxValue = Math.max(...this.#elfCalories)
-
-    return maxValue
-
-    // this.linesAsInts.reduce((collection, currentValue) => {
-    //   const currentElfValue = collection[currentElfIndex]
-
-
-
-    //   if (currentElfValue === undefined) {
-    //     collection.push(currentValue)
-    //   }
-    //   else {
-    //     collection[currentElfIndex] = currentElfValue + currentValue
-    //   }
-
-    //   return collection
-    // }, [])
+    return this.lines.reduce((sb, line) => sb + line, '')
   }
 
   solvePart2() {
-    const elves = [...this.#elfCalories]
-    elves.sort((a, b) => b - a)
-
-    return elves.slice(0, 3).reduce((sum, currentValue) => sum + currentValue, 0)
-  }
-
-  get #elfCalories() {
-    let currentElfIndex = 0
-
-    this.linesAsInts
-
-    const elves = [0]
-    for (let i = 0; i < this.linesAsInts.length; i++) {
-      const currentValue = this.linesAsInts[i]
-
-      if (currentValue === 0) {
-        currentElfIndex++
-        elves.push(0)
-      }
-      else {
-        elves[currentElfIndex] += currentValue
-      }
-    }
-
-    return elves
+    return parseInt(this.solvePart1())
   }
 }
 
