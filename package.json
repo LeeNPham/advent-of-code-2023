@@ -1,0 +1,32 @@
+{
+  "name": "advent-of-code-2021",
+  "version": "1.0.0",
+  "description": "https://adventofcode.com/2021",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:coverage": "npm test -- --coverage",
+    "test:watch": "npm test -- --watch",
+    "new:day": "node ./src/_lib/new-day.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ctsstc/advent-of-code-2021.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ctsstc/advent-of-code-2021/issues"
+  },
+  "homepage": "https://github.com/ctsstc/advent-of-code-2021#readme",
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.2",
+    "prettier": "2.5.0"
+  },
+  "dependencies": {
+    "zx": "^4.2.0"
+  }
+}
