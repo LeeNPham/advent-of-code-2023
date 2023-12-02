@@ -5,7 +5,7 @@ function isNumeric(value) {
 }
 
 //start
-
+// fuck it, just convert any substring as we iterate through the string to get the numbers
 function convertString(inputString) {
   const wordMap = {
     one: '1',
@@ -17,7 +17,6 @@ function convertString(inputString) {
     seven: '7',
     eight: '8',
     nine: '9',
-    zero: '0',
   }
 
   let result = ''
