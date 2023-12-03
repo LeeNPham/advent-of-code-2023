@@ -8,7 +8,6 @@ const __dirname = dirname(__filename)
 describe('Day 02', () => {
   describe('example.txt', () => {
     const problem = new Problem(__dirname + '/example.txt')
-    // remember to take out xit and change it to it
     it('solves part 1', () => {
       expect(problem.solvePart1()).toBe(8)
     })

@@ -55,7 +55,6 @@ class Day02 extends Problem {
       let parsedGameData = parseGameData(this.lines[i])
       let totalCubePower =
         parsedGameData.red * parsedGameData.green * parsedGameData.blue
-      console.log(totalCubePower)
       counter = counter + totalCubePower
     }
     console.log(counter)
