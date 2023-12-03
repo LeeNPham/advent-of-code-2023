@@ -1,20 +1,20 @@
-import Problem from './day-01.mjs'
+import Problem from './day-02.mjs'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-describe('Day 01', () => {
+describe('Day 02', () => {
   describe('example.txt', () => {
     const problem = new Problem(__dirname + '/example.txt')
     // remember to take out xit and change it to it
-    // it('solves part 1', () => {
-    //   expect(problem.solvePart1()).toBe(142)
-    // })
+    xit('solves part 1', () => {
+      expect(problem.solvePart1()).toBe('1')
+    })
 
     // it('solves part 2', () => {
-    //   expect(problem.solvePart2()).toBe(281)
+    //   expect(problem.solvePart2()).toBe(123)
     // })
   })
 
@@ -22,11 +22,11 @@ describe('Day 01', () => {
     const problem = new Problem(__dirname + '/input.txt')
 
     // it('solves part 1', () => {
-    //   expect(problem.solvePart1()).toBe(54951)
+    //   expect(problem.solvePart1()).toBe('456789')
     // })
 
     // it('solves part 2', () => {
-    //   expect(problem.solvePart2()).toBe(55218)
+    //   expect(problem.solvePart2()).toBe(456789)
     // })
   })
 })

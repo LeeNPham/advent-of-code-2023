@@ -6,49 +6,32 @@ function isNumeric(value) {
 
 //start
 // fuck it, just convert any substring as we iterate through the string to get the numbers
-function convertString(inputString) {
-  const wordMap = {
-    one: '1',
-    two: '2',
-    three: '3',
-    four: '4',
-    five: '5',
-    six: '6',
-    seven: '7',
-    eight: '8',
-    nine: '9',
+//explanation for the following code: To deal with spelled out numbers that "share" a letter (eg. eightwo, where they share a "t"), we map out the
+//numbers to retain the first and last letters so that the subsequent spelled letters still get converted. In the original regex mapping, what was
+//happening was eightwo would be changed to 8wo when we wanted 82 since regex apparently cannot detect "two" after "eight" has been converted into 8.
+function convertString(input) {
+  const replacements = {
+    one: 'o1e',
+    two: 't2o',
+    three: 't3e',
+    four: 'f4r',
+    five: 'f5e',
+    six: 's6x',
+    seven: 's7n',
+    eight: 'e8t',
+    nine: 'n9e',
   }
 
-  let result = ''
-  let currentWord = ''
-
-  for (let i = 0; i < inputString.length; i++) {
-    const char = inputString[i]
-
-    if (isNaN(char)) {
-      // If the character is not a digit, consider it as part of a word
-      currentWord += char.toLowerCase()
-
-      // Check if the current word is a key in the wordMap
-      if (wordMap.hasOwnProperty(currentWord)) {
-        result += wordMap[currentWord]
-        currentWord = '' // Reset the current word
-      }
-    } else {
-      // If the character is a digit, append it to the result
-      result += char
+  let result = input
+  for (const key in replacements) {
+    if (replacements.hasOwnProperty(key)) {
+      const regex = new RegExp(key, 'g')
+      result = result.replace(regex, replacements[key])
     }
   }
 
   return result
 }
-
-// Example usage:
-// const inputString = "eightwothree3";
-// const convertedString = convertString(inputString);
-// console.log(convertedString); // Output: "8wo3"
-
-//end
 
 class Day01 extends Problem {
   constructor(inputFileName) {
@@ -94,14 +77,12 @@ class Day01 extends Problem {
     let res = 0
     let leftList = []
     let rightList = []
-
     for (let value of this.lines) {
       console.log('first value version', value)
       value = convertString(value)
       console.log('second value version', value)
       let leftIndex = 0
       let rightIndex = value.length
-
       while (leftIndex <= value.length) {
         if (isNumeric(value[leftIndex])) {
           leftList.push(value[leftIndex])
@@ -110,7 +91,6 @@ class Day01 extends Problem {
           leftIndex = leftIndex + 1
         }
       }
-
       while (rightIndex >= 0) {
         if (isNumeric(value[rightIndex])) {
           rightList.push(value[rightIndex])
@@ -125,6 +105,7 @@ class Day01 extends Problem {
       counter = counter + parseInt(leftList[i] + rightList[i])
     }
     res = counter
+    console.log(res)
     return res
   }
 }
