@@ -13,26 +13,26 @@ class Day03 extends Problem {
     // we can make sure that the number hasn't already been added by changing the value of the added numbers to . within the list
     // add those numbers onto a counter amd continue iterating through the lists
     //
-    // return this.this.lines.reduce((sb, line) => sb + line, '')
+    // return this.lines.reduce((sb, line) => sb + line, '')
 
     const symbolRegex = /[^0-9.]/g
 
     const getNumber = (currIndex, lineIndex) => {
-      let number = this.this.lines[lineIndex][currIndex]
+      let number = this.lines[lineIndex][currIndex]
 
       // replace right
-      for (let i = currIndex + 1; i < this.this.lines[lineIndex].length; i++) {
-        if (isNaN(+this.this.lines[lineIndex][i])) break
+      for (let i = currIndex + 1; i < this.lines[lineIndex].length; i++) {
+        if (isNaN(+this.lines[lineIndex][i])) break
 
-        number = number + this.this.lines[lineIndex][i]
+        number = number + this.lines[lineIndex][i]
         replaceNumberWithDot(i, lineIndex)
       }
 
       // replace left
       for (let i = currIndex - 1; i >= 0; i--) {
-        if (isNaN(+this.this.lines[lineIndex][i])) break
+        if (isNaN(+this.lines[lineIndex][i])) break
 
-        number = this.this.lines[lineIndex][i] + number
+        number = this.lines[lineIndex][i] + number
         replaceNumberWithDot(i, lineIndex)
       }
 
@@ -40,67 +40,67 @@ class Day03 extends Problem {
     }
 
     const replaceNumberWithDot = (currIndex, lineIndex) => {
-      const arr = this.this.lines[lineIndex].split('')
+      const arr = this.lines[lineIndex].split('')
       arr.splice(currIndex, 1, '.')
       const newStr = arr.join('')
-      this.this.lines[lineIndex] = newStr
+      this.lines[lineIndex] = newStr
     }
 
     const getSumOfAjacentNumbers = (symbolIndex, lineIndex) => {
       let sum = 0
       // left
       if (
-        this.this.lines[lineIndex][symbolIndex - 1] &&
-        !isNaN(+this.this.lines[lineIndex][symbolIndex - 1])
+        this.lines[lineIndex][symbolIndex - 1] &&
+        !isNaN(+this.lines[lineIndex][symbolIndex - 1])
       )
         sum += getNumber(symbolIndex - 1, lineIndex)
       // right
       if (
-        this.this.lines[lineIndex][symbolIndex + 1] &&
-        !isNaN(+this.this.lines[lineIndex][symbolIndex + 1])
+        this.lines[lineIndex][symbolIndex + 1] &&
+        !isNaN(+this.lines[lineIndex][symbolIndex + 1])
       )
         sum += getNumber(symbolIndex + 1, lineIndex)
       // top
       if (
-        this.this.lines[lineIndex - 1] &&
-        this.this.lines[lineIndex - 1][symbolIndex] &&
-        !isNaN(+this.this.lines[lineIndex - 1][symbolIndex])
+        this.lines[lineIndex - 1] &&
+        this.lines[lineIndex - 1][symbolIndex] &&
+        !isNaN(+this.lines[lineIndex - 1][symbolIndex])
       )
         sum += getNumber(symbolIndex, lineIndex - 1)
       // bottom
       if (
-        this.this.lines[lineIndex + 1] &&
-        this.this.lines[lineIndex + 1][symbolIndex] &&
-        !isNaN(+this.this.lines[lineIndex + 1][symbolIndex])
+        this.lines[lineIndex + 1] &&
+        this.lines[lineIndex + 1][symbolIndex] &&
+        !isNaN(+this.lines[lineIndex + 1][symbolIndex])
       )
         sum += getNumber(symbolIndex, lineIndex + 1)
 
       // Top left diag
       if (
-        this.this.lines[lineIndex - 1] &&
-        this.this.lines[lineIndex - 1][symbolIndex - 1] &&
-        !isNaN(+this.this.lines[lineIndex - 1][symbolIndex - 1])
+        this.lines[lineIndex - 1] &&
+        this.lines[lineIndex - 1][symbolIndex - 1] &&
+        !isNaN(+this.lines[lineIndex - 1][symbolIndex - 1])
       )
         sum += getNumber(symbolIndex - 1, lineIndex - 1)
       // Top right diag
       if (
-        this.this.lines[lineIndex - 1] &&
-        this.this.lines[lineIndex - 1][symbolIndex + 1] &&
-        !isNaN(+this.this.lines[lineIndex - 1][symbolIndex + 1])
+        this.lines[lineIndex - 1] &&
+        this.lines[lineIndex - 1][symbolIndex + 1] &&
+        !isNaN(+this.lines[lineIndex - 1][symbolIndex + 1])
       )
         sum += getNumber(symbolIndex + 1, lineIndex - 1)
       // Bottom left diag
       if (
-        this.this.lines[lineIndex + 1] &&
-        this.this.lines[lineIndex + 1][symbolIndex - 1] &&
-        !isNaN(+this.this.lines[lineIndex + 1][symbolIndex - 1])
+        this.lines[lineIndex + 1] &&
+        this.lines[lineIndex + 1][symbolIndex - 1] &&
+        !isNaN(+this.lines[lineIndex + 1][symbolIndex - 1])
       )
         sum += getNumber(symbolIndex - 1, lineIndex + 1)
       // Bottom right diag
       if (
-        this.this.lines[lineIndex + 1] &&
-        this.this.lines[lineIndex + 1][symbolIndex + 1] &&
-        !isNaN(+this.this.lines[lineIndex + 1][symbolIndex + 1])
+        this.lines[lineIndex + 1] &&
+        this.lines[lineIndex + 1][symbolIndex + 1] &&
+        !isNaN(+this.lines[lineIndex + 1][symbolIndex + 1])
       )
         sum += getNumber(symbolIndex + 1, lineIndex + 1)
 
@@ -111,7 +111,7 @@ class Day03 extends Problem {
       let sum = 0
 
       for (let i = 0; i < line.length; i++) {
-        const char = this.this.lines[lineIndex][i]
+        const char = this.lines[lineIndex][i]
         if (symbolRegex.test(char))
           sum += getSumOfAjacentNumbers(i, lineIndex, line)
       }
@@ -120,8 +120,8 @@ class Day03 extends Problem {
     }
 
     let finalNumber = 0
-    for (let i = 0; i < this.this.lines.length; i++) {
-      const line = this.this.lines[i]
+    for (let i = 0; i < this.lines.length; i++) {
+      const line = this.lines[i]
       if (symbolRegex.test(line)) finalNumber += addAjacentNumbers(i, line)
     }
 
