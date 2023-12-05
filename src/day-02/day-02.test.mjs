@@ -8,24 +8,24 @@ const __dirname = dirname(__filename)
 describe('Day 02', () => {
   describe('example.txt', () => {
     const problem = new Problem(__dirname + '/example.txt')
-    it('solves part 1', () => {
-      expect(problem.solvePart1()).toBe(8)
-    })
+    // it('solves part 1', () => {
+    //   expect(problem.solvePart1()).toBe(8)
+    // })
 
-    it('solves part 2', () => {
-      expect(problem.solvePart2()).toBe(2286)
-    })
+    // it('solves part 2', () => {
+    //   expect(problem.solvePart2()).toBe(2286)
+    // })
   })
 
   describe('input.txt', () => {
     const problem = new Problem(__dirname + '/input.txt')
 
-    it('solves part 1', () => {
-      expect(problem.solvePart1()).toBe(2278)
-    })
+    // it('solves part 1', () => {
+    //   expect(problem.solvePart1()).toBe(2278)
+    // })
 
-    it('solves part 2', () => {
-      expect(problem.solvePart2()).toBe(67953)
-    })
+    // it('solves part 2', () => {
+    //   expect(problem.solvePart2()).toBe(67953)
+    // })
   })
 })

@@ -125,7 +125,7 @@ class Day03 extends Problem {
       if (symbolRegex.test(line)) finalNumber += addAjacentNumbers(i, line)
     }
 
-    // console.log(finalNumber)
+    console.log(finalNumber)
     return finalNumber
   }
 
@@ -245,7 +245,7 @@ class Day03 extends Problem {
       if (symbolRegex.test(line)) finalNumber += addAjacentNumbers(i, line)
     }
 
-    console.log(finalNumber)
+    // console.log(finalNumber)
     return finalNumber
   }
 }
