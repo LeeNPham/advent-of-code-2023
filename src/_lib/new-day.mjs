@@ -22,8 +22,8 @@ await Promise.all([
 ])
 
 cd(newDirectory)
-await $`npx rexreplace 'Day 00' 'Day ${day}/' *`
-await $`npx rexreplace 'Day00' 'Day${day}' *`
-await $`npx rexreplace 'day-00' 'day-${day}' *`
+await $`npx rexreplace 'Day 00' 'Day ${day}' *.mjs`
+await $`npx rexreplace 'Day00' 'Day${day}' *.mjs`
+await $`npx rexreplace 'day-00' 'day-${day}' *.mjs`
 
 console.log(`Finished creating: Day ${day} at ${newDirectory}`)
