@@ -24,7 +24,7 @@ class Day04 extends Problem {
         let rightLine = bothLines[1]
           .split(' ')
           .filter((str) => str.trim() !== '')
-        console.log({ 'winning numbers': leftLine, 'my numbers': rightLine })
+        // console.log({ 'winning numbers': leftLine, 'my numbers': rightLine })
 
         // go through winning numbers to add to temp counter for each line.
         for (let winningNumber of leftLine) {
@@ -32,7 +32,7 @@ class Day04 extends Problem {
             tempCounter++
           }
         }
-        console.log(' TEMPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP', tempCounter)
+        // console.log(' TEMPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP', tempCounter)
 
         if (tempCounter > 1) {
           count = count + 2 ** (tempCounter - 1)
@@ -46,20 +46,20 @@ class Day04 extends Problem {
         }
       }
     }
-    console.log('this is COUNTTTTTTTT', count)
+    // console.log('this is COUNTTTTTTTT', count)
     return count
   }
 
   solvePart2() {
     let cardSets = {}
-    // for (let line in this.lines) {
-    //   console.log(line)
-    //   // cardSets[]
-    // }
+    for (let line in this.lines) {
+      if (parseInt(line) < this.lines.length - 1) {
+        cardSets[(parseInt(line) + 1).toString()] = 1
+      }
+    }
 
-    console.log('this is card Sets Initialized', cardSets)
-    // let count = 0
     let currentCard = 0
+
     for (let line of this.lines) {
       currentCard++
       if (line) {
@@ -74,29 +74,37 @@ class Day04 extends Problem {
           .filter((str) => str.trim() !== '')
         // console.log({ 'winning numbers': leftLine, 'my numbers': rightLine })
 
-        // go through winning numbers to add to temp counter for each line.
+        // go through winning numbers to add to tempCounter for each line.
         for (let winningNumber of leftLine) {
           if (rightLine.includes(winningNumber)) {
             tempCounter++
           }
         }
-        // console.log(' Temp Counter', tempCounter)
-        // console.log('Current Card', currentCard)
 
-        // if (tempCounter > 1) {
-        //   count = count + 2 ** (tempCounter - 1)
-        //   tempCounter = 0
+        for (let i = currentCard + 1; i <= currentCard + tempCounter; i++) {
+          cardSets[i.toString()] = parseInt(cardSets[i]) + cardSets[currentCard]
+        }
+        // console.log('NEW CARDSET', cardSets)
+        // let res = 0
+        // for (let key in cardSets) {
+        //   res = res + cardSets[key]
         // }
-        // if (tempCounter == 1) {
-        //   count = count + 1
-        //   tempCounter = 0
-        // } else {
-        //   tempCounter = 0
-        // }
+        // console.log('RESULTTTTTTTTTTTTTTTTT?', res)
       }
     }
     // console.log('this is COUNTTTTTTTT', count)
-    return 0
+    function getCards(cardSets) {
+      const values = Object.values(cardSets)
+      const sum = values.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0,
+      )
+      return sum
+    }
+
+    let totalCards = getCards(cardSets)
+    console.log('this is the totaaaaal cards', totalCards)
+    return totalCards
   }
 }
 
