@@ -5,16 +5,25 @@ const baseDirectory = './src/day-00'
 const newDirectory = './src/day-' + day
 const extension = 'mjs'
 
-await $`cp -r ${baseDirectory} ${newDirectory}`
+// await $`cp -r ${baseDirectory} ${newDirectory}`
+await fs.copy(baseDirectory, newDirectory)
 
 await Promise.all([
-  $`mv ${newDirectory}/day-00.${extension} ${newDirectory}/day-${day}.${extension}`,
-  $`mv ${newDirectory}/day-00.test.${extension} ${newDirectory}/day-${day}.test.${extension}`,
+  fs.move(
+    `${newDirectory}/day-00.${extension}`,
+    `${newDirectory}/day-${day}.${extension}`,
+  ),
+  fs.move(
+    `${newDirectory}/day-00.test.${extension}`,
+    `${newDirectory}/day-${day}.test.${extension}`,
+  ),
+  // $`mv ${newDirectory}/day-00.${extension} ${newDirectory}/day-${day}.${extension}`,
+  // $`mv ${newDirectory}/day-00.test.${extension} ${newDirectory}/day-${day}.test.${extension}`,
 ])
 
 cd(newDirectory)
-await $`sed -i 's/Day 00/Day ${day}/g' *`
-await $`sed -i 's/Day00/Day${day}/g' *`
-await $`sed -i 's/day-00/day-${day}/g' *`
+await $`npx rexreplace 'Day 00' 'Day ${day}/' *`
+await $`npx rexreplace 'Day00' 'Day${day}' *`
+await $`npx rexreplace 'day-00' 'day-${day}' *`
 
 console.log(`Finished creating: Day ${day} at ${newDirectory}`)
