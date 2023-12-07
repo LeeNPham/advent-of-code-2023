@@ -29,7 +29,6 @@ class Day05 extends Problem {
     const arrayOfMaps = arrayOfLines.slice(2, arrayOfLines.length)
     let mappingList = createMaps(arrayOfMaps)
     for (let seed of listOfSeeds) {
-      let seedLocation = seed
       for (let key in mappingList) {
         for (let value of mappingList[key]) {
           let startingPoint = value[1]
