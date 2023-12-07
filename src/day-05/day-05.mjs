@@ -19,28 +19,40 @@ class Day05 extends Problem {
       }
       return maps
     }
+    function isNumberInRange(number, lowerBound, upperBound) {
+      return number >= lowerBound && number <= upperBound
+    }
 
     const arrayOfLines = this.lines
     const listOfSeeds = arrayOfLines[0].split(': ')[1].split(' ')
-    // console.log('SEEDS', listOfSeeds)
     let seedLocations = []
     const arrayOfMaps = arrayOfLines.slice(2, arrayOfLines.length)
     let mappingList = createMaps(arrayOfMaps)
-    console.log('MAPPINGS LIST', mappingList)
     for (let seed of listOfSeeds) {
       let seedLocation = seed
-      console.log('SEED VALUE', seed)
       for (let key in mappingList) {
-        // console.log('KEYYY', key)
         for (let value of mappingList[key]) {
-          console.log(`lists in ${key}`, value)
+          let startingPoint = value[1]
+          let endingPoint = value[1] + value[2]
+          let numberInRangeStatus = isNumberInRange(
+            seed,
+            startingPoint,
+            endingPoint,
+          )
+          if (numberInRangeStatus) {
+            seed = parseInt(seed) + (value[0] - value[1])
+            break
+          }
           // use the value per list to create a range using index 1 and index 2,  and if seed is in there, then reference index 0 to add the difference between [1]-[0]
         }
       }
-
-      seedLocations.push(seedLocation)
+      // console.log('Resulting Seed?', seed)
+      seedLocations.push(seed)
     }
-    console.log('List of Seed Locations', seedLocations)
+    // console.log('List of Seed Locations', seedLocations)
+    let numericValues = seedLocations.map(Number)
+    let smallestValue = Math.min(...numericValues)
+    console.log('The smallest value is:', smallestValue)
     //seed to soil seed 13
     // seed goes to 13 if it isnt within the starting range of the source range (1)
     // so soil destination is 13
@@ -59,7 +71,7 @@ class Day05 extends Problem {
     // the condition is if it's within any of the ranges of the starting source value + range, if so, apply the difference between source value -> destination value (destination-source = value we apply to previous derived number from previous map)
     // continue with this logic until we get the resulting location and append it to a list.
 
-    return 0
+    return smallestValue
   }
 
   solvePart2() {
