@@ -23,32 +23,25 @@ class Day05 extends Problem {
       return number >= lowerBound && number <= upperBound
     }
 
-    const arrayOfLines = this.lines
-    const listOfSeeds = arrayOfLines[0].split(': ')[1].split(' ')
     let seedLocations = []
-    const arrayOfMaps = arrayOfLines.slice(2, arrayOfLines.length)
-    let mappingList = createMaps(arrayOfMaps)
+    const listOfSeeds = this.lines[0].split(': ')[1].split(' ')
+    let mappingList = createMaps(this.lines.slice(2, this.lines.length))
     for (let seed of listOfSeeds) {
       for (let key in mappingList) {
         for (let value of mappingList[key]) {
-          let startingPoint = value[1]
-          let endingPoint = value[1] + value[2]
           let numberInRangeStatus = isNumberInRange(
             parseInt(seed),
-            startingPoint,
-            endingPoint,
+            value[1],
+            value[1] + value[2],
           )
           if (numberInRangeStatus) {
             seed = parseInt(seed) + (value[0] - value[1])
             break
           }
-          // use the value per list to create a range using index 1 and index 2,  and if seed is in there, then reference index 0 to add the difference between [1]-[0]
         }
       }
-      // console.log('Resulting Seed?', seed)
       seedLocations.push(seed)
     }
-    // console.log('List of Seed Locations', seedLocations)
     let numericValues = seedLocations.map(Number)
     let smallestValue = Math.min(...numericValues)
     console.log('The smallest value is:', smallestValue)
