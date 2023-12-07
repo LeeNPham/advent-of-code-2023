@@ -59,7 +59,7 @@ class Day05 extends Problem {
     // the condition is if it's within any of the ranges of the starting source value + range, if so, apply the difference between source value -> destination value (destination-source = value we apply to previous derived number from previous map)
     // continue with this logic until we get the resulting location and append it to a list.
 
-    return this.lines.reduce((sb, line) => sb + line, '')
+    return 0
   }
 
   solvePart2() {
