@@ -8,9 +8,9 @@ const __dirname = dirname(__filename)
 describe('Day 05', () => {
   describe('example.txt', () => {
     const problem = new Problem(__dirname + '/example.txt')
-    // it('solves part 1', () => {
-    //   expect(problem.solvePart1()).toBe('1')
-    // })
+    it('solves part 1', () => {
+      expect(problem.solvePart1()).toBe('1')
+    })
 
     // it('solves part 2', () => {
     //   expect(problem.solvePart2()).toBe(123)

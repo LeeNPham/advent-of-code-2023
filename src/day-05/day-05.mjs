@@ -6,6 +6,41 @@ class Day05 extends Problem {
   }
 
   solvePart1() {
+    function createMaps(data) {
+      const maps = {}
+      let currentMapName = ''
+      for (const line of data) {
+        if (line.endsWith('map:')) {
+          currentMapName = line.slice(0, -5) // Remove ' map:' from the title
+          maps[currentMapName] = []
+        } else if (line.trim()) {
+          maps[currentMapName].push(line.split(' ').map(Number))
+        }
+      }
+      return maps
+    }
+
+    const arrayOfLines = this.lines
+    const listOfSeeds = arrayOfLines[0].split(': ')[1].split(' ')
+    // console.log('SEEDS', listOfSeeds)
+    let seedLocations = []
+    const arrayOfMaps = arrayOfLines.slice(2, arrayOfLines.length)
+    let mappingList = createMaps(arrayOfMaps)
+    console.log('MAPPINGS LIST', mappingList)
+    for (let seed of listOfSeeds) {
+      let seedLocation = seed
+      console.log('SEED VALUE', seed)
+      for (let key in mappingList) {
+        // console.log('KEYYY', key)
+        for (let value of mappingList[key]) {
+          console.log(`lists in ${key}`, value)
+          // use the value per list to create a range using index 1 and index 2,  and if seed is in there, then reference index 0 to add the difference between [1]-[0]
+        }
+      }
+
+      seedLocations.push(seedLocation)
+    }
+    console.log('List of Seed Locations', seedLocations)
     //seed to soil seed 13
     // seed goes to 13 if it isnt within the starting range of the source range (1)
     // so soil destination is 13
