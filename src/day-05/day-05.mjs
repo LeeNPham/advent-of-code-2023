@@ -34,7 +34,7 @@ class Day05 extends Problem {
           let startingPoint = value[1]
           let endingPoint = value[1] + value[2]
           let numberInRangeStatus = isNumberInRange(
-            seed,
+            parseInt(seed),
             startingPoint,
             endingPoint,
           )
