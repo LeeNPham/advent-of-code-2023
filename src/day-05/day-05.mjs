@@ -58,9 +58,8 @@ class Day05 extends Problem {
       return maps
     }
 
-    let seedLocations = []
     let pairsOfSeeds = []
-    let listOfSeedsAfterPairing = []
+    let smallestLocationValue
     const listOfSeeds = this.lines[0].split(': ')[1].split(' ')
     const mappingList = createMaps(this.lines.slice(2, this.lines.length))
 
@@ -78,28 +77,29 @@ class Day05 extends Problem {
         start <= parseInt(setOfSeeds[1]) + parseInt(setOfSeeds[0]);
         start++
       ) {
-        listOfSeedsAfterPairing.push(start)
-      }
-    }
-
-    for (let seed of listOfSeedsAfterPairing) {
-      for (let key in mappingList) {
-        for (let value of mappingList[key]) {
-          if (
-            parseInt(seed) >= value[1] &&
-            parseInt(seed) <= value[1] + value[2]
-          ) {
-            seed = parseInt(seed) + (value[0] - value[1])
-            break
+        let falseStart = start
+        for (let key in mappingList) {
+          for (let value of mappingList[key]) {
+            if (
+              parseInt(start) >= value[1] &&
+              parseInt(start) <= value[1] + value[2]
+            ) {
+              falseStart = parseInt(falseStart) + (value[0] - value[1])
+              break
+            }
+          }
+        }
+        if (!smallestLocationValue) {
+          smallestLocationValue = falseStart
+        } else {
+          if (falseStart < smallestLocationValue) {
+            smallestLocationValue = falseStart
           }
         }
       }
-      seedLocations.push(seed)
     }
-
-    let smallestValue = Math.min(...seedLocations.map(Number))
-    console.log('The smallest value is:', smallestValue)
-    return smallestValue
+    console.log(smallestLocationValue)
+    return smallestLocationValue
   }
 }
 
