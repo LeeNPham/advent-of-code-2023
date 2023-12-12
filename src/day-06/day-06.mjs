@@ -55,7 +55,6 @@ class Day06 extends Problem {
   solvePart2() {
     let lines = this.lines
     let timeDistanceList = []
-    let finalList = []
     let ans = []
     const regex = /-?\d+(\.\d+)?/g
     for (let line of lines) {
@@ -66,12 +65,9 @@ class Day06 extends Problem {
     }
     console.log({ timeDistanceList })
 
-    // console.log({ finalList })
-
     function ways(t, d) {
       let count = 0
       for (let index = 0; index < t; index++) {
-        // Hold down for i seconds
         if ((t - index) * index > d) {
           count += 1
         }
@@ -79,9 +75,7 @@ class Day06 extends Problem {
       return count
     }
 
-    for (const [t, d] of finalList) {
-      ans.push(ways(t, d))
-    }
+    ans.push(ways(timeDistanceList[0], timeDistanceList[1]))
 
     let p = 1
 
