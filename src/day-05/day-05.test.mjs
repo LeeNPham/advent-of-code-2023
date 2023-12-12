@@ -25,9 +25,9 @@ describe('Day 05', () => {
     // })
 
     // not this number
-    //7873085, 456789, -4519840207, 1240035
+    //7873085
     it('solves part 2', () => {
-      expect(problem.solvePart2()).toBe(456789)
+      expect(problem.solvePart2()).toBe(7873084)
     })
   })
 })
