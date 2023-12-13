@@ -16,6 +16,7 @@ class Day08 extends Problem {
     )
     console.log({ networkMap })
     //
+    // make a curry function to return the direction value based on the value of an index put into it
     //
     // use a while loop, with a breakCase where target = 'ZZZ'
     //
