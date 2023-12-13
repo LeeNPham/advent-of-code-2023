@@ -240,11 +240,8 @@ class Day07 extends Problem {
         }
       })
       const filteredHands = sortedHands.filter((a) => a !== undefined)
-
-      console.log(filteredHands)
-
       const rankedHands = rankHands(filteredHands)
-      console.log(rankedHands)
+
       return rankedHands
     }
 
