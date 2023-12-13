@@ -6,7 +6,21 @@ class Day08 extends Problem {
   }
 
   solvePart1() {
-    return this.lines.reduce((sb, line) => sb + line, '')
+    let networkMap = {}
+    const directions = this.lines[0]
+    console.log({ directions })
+    const network = this.lines.splice(2, this.lines.length - 3)
+    network.map(
+      (str) =>
+        (networkMap[str.slice(0, 3)] = [str.slice(7, 10), str.slice(12, 15)]),
+    )
+    console.log({ networkMap })
+    //
+    //
+    // use a while loop, with a breakCase where target = 'ZZZ'
+    //
+    //
+    return 0
   }
 
   solvePart2() {
