@@ -9,6 +9,12 @@ class Day08 extends Problem {
     let networkMap = {}
     const directions = this.lines[0]
     console.log({ directions })
+
+    const direction = (i) => {
+      let effectiveIndex = i % directions.length
+      return directions[effectiveIndex]
+    }
+
     const network = this.lines.splice(2, this.lines.length - 3)
     network.map(
       (str) =>
@@ -16,9 +22,8 @@ class Day08 extends Problem {
     )
     console.log({ networkMap })
     //
-    // make a curry function to return the direction value based on the value of an index put into it
     //
-    // use a while loop, with a breakCase where target = 'ZZZ'
+    // use a recursive function where it loops through the network map, with a breakCase where target = 'ZZZ'
     //
     //
     return 0
