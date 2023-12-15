@@ -42,8 +42,8 @@ class Day08 extends Problem {
 
   solvePart2() {
     let networkMap = {}
+    let i = 0
     const directions = this.lines[0]
-    console.log({ directions })
 
     const direction = (i) => {
       let effectiveIndex = i % directions.length
@@ -57,21 +57,35 @@ class Day08 extends Problem {
     )
     console.log({ networkMap })
 
-    let i = 0
+    let places = Object.keys(networkMap)
+    let listOfStarts = places.filter((str) => str[2] === 'A')
+    let listOfEnds = places.filter((str) => str[2] === 'Z')
+    console.log(listOfStarts)
+    console.log(listOfEnds)
+    //
+    // As you follow each left/right instruction,
+    // use that instruction to simultaneously navigate away from both nodes you're currently on.
+    // Repeat this process until all of the nodes you're currently on end with Z.
+    // (If only some of the nodes you're on end with Z,
+    // they act like any other node and you continue as normal.)
+    //
+
+    //
     let foundTarget = false
     let currentPlace = 'AAA'
+    // let currentPlaces =
     let currentTarget = 'ZZZ'
-    // use a recursive function where it loops through the network map, with a breakCase where target = 'ZZZ'
-    while (foundTarget == false) {
-      if (currentPlace !== currentTarget) {
-        // change value of currentPlace based on the i (which is either the left or right value which is the next key)
-        currentPlace = networkMap[currentPlace][direction(i) == 'L' ? 0 : 1]
-        i++
-      } else {
-        foundTarget = true
-      }
-    }
-    console.log(i)
+
+    // while (foundTarget == false) {
+    //   if (currentPlace !== currentTarget) {
+    //     currentPlace = networkMap[currentPlace][direction(i) == 'L' ? 0 : 1]
+    //     i++
+    //   } else {
+    //     foundTarget = true
+    //   }
+    // }
+
+    // console.log(i)
     return i
   }
 }
