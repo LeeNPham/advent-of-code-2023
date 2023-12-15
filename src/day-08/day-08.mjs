@@ -42,13 +42,6 @@ class Day08 extends Problem {
 
   solvePart2() {
     let networkMap = {}
-    let i = 0
-    const directions = this.lines[0]
-
-    const direction = (i) => {
-      let effectiveIndex = i % directions.length
-      return directions[effectiveIndex]
-    }
 
     const network = this.lines.splice(2, this.lines.length - 3)
     network.map(
@@ -57,36 +50,33 @@ class Day08 extends Problem {
     )
     console.log({ networkMap })
 
-    let places = Object.keys(networkMap)
-    let listOfStarts = places.filter((str) => str[2] === 'A')
-    let listOfEnds = places.filter((str) => str[2] === 'Z')
-    console.log(listOfStarts)
-    console.log(listOfEnds)
-    //
-    // As you follow each left/right instruction,
-    // use that instruction to simultaneously navigate away from both nodes you're currently on.
-    // Repeat this process until all of the nodes you're currently on end with Z.
-    // (If only some of the nodes you're on end with Z,
-    // they act like any other node and you continue as normal.)
-    //
+    const startingNodes = Object.keys(networkMap).filter((node) =>
+      node.endsWith('A'),
+    )
 
-    //
-    let foundTarget = false
-    let currentPlace = 'AAA'
-    // let currentPlaces =
-    let currentTarget = 'ZZZ'
+    // console.log({ startingNodes   })
 
-    // while (foundTarget == false) {
-    //   if (currentPlace !== currentTarget) {
-    //     currentPlace = networkMap[currentPlace][direction(i) == 'L' ? 0 : 1]
-    //     i++
-    //   } else {
-    //     foundTarget = true
-    //   }
-    // }
+    function navigate(nodes, networkMap, left) {
+      return nodes.map((node) => networkMap[node][left ? 0 : 1])
+    }
 
-    // console.log(i)
-    return i
+    function findStepsToAllZ(networkMap, startingNodes) {
+      let currentNodes = startingNodes
+      let steps = 0
+      let left = true
+
+      while (!currentNodes.every((node) => node.endsWith('Z'))) {
+        currentNodes = navigate(currentNodes, networkMap, left)
+        left = !left
+        steps++
+      }
+
+      return steps
+    }
+
+    const stepsToAllZ = findStepsToAllZ(networkMap, startingNodes)
+    console.log("Number of steps to reach all 'Z'  nodes:", stepsToAllZ)
+    return stepsToAllZ
   }
 }
 
