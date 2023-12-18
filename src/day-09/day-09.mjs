@@ -6,6 +6,8 @@ class Day09 extends Problem {
   }
 
   solvePart1() {
+    // hello world
+
     return this.lines.reduce((sb, line) => sb + line, '')
   }
 
