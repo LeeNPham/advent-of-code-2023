@@ -52,7 +52,6 @@ class Day09 extends Problem {
     const histories = this.lines
       .filter((x) => x != '')
       .map((s) => s.split(' ').map((n) => parseInt(n)))
-    console.log({ histories })
 
     function calculatePreviousValue(history) {
       let sequences = [history]
