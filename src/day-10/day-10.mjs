@@ -18,24 +18,64 @@ class Day10 extends Problem {
   solvePart1() {
     // hello world
     const grid = new Grid(this.lines)
-    // const start = grid.testStartingPoint()
-    // const startingCoordinates = [start.x, start.y]
-    // let leftPointer = startingCoordinates
-    // let rightPointer = startingCoordinates
-    // let counter = 0
+    const start = grid.testStartingPoint()
+    const startingCoordinates = [start.x, start.y]
+    let leftPointer = startingCoordinates
+    let rightPointer = startingCoordinates
+    let counter = 0
+    let rowLength = this.lines[0].split('').length
+    let columnHeight = this.lines.length - 1
+    // console.log({ rowLength, columnHeight })
+    console.log(startingCoordinates)
+    const lines = this.lines
+    let matrix = lines
+    matrix.pop()
+    let finalGrid = matrix.map(function (a) {
+      return a.split('')
+    })
 
-    // console.log(startingCoordinates)
-    // const mapDirections = {
-    // '|': ['north', 'south'],
-    //   '-': ['west', 'east'],
-    //   L: ['north', 'east'],
-    //   J: ['north', 'west'],
-    //   7: ['south', 'west'],
-    //   F: ['south', 'east'],
-    // }
+    console.log(finalGrid)
+
+    const mapDirections = {
+      '|': ['north', 'south'],
+      '-': ['west', 'east'],
+      L: ['north', 'east'],
+      J: ['north', 'west'],
+      7: ['south', 'west'],
+      F: ['south', 'east'],
+    }
 
     // check to see which of the startingCoordinates work, and create an list of lists [[x1,y1],[x2,y2]]
+    let startingCheckCoordinates = []
+    // checks north
+    if (startingCoordinates[1] >= 1) {
+      let northCoordinate = [startingCoordinates[0], startingCoordinates[1] - 1]
+      console.log({ northCoordinate })
+      let northSymbol = finalGrid[northCoordinate[1]][northCoordinate[0]]
+      console.log(northSymbol)
+      if (northSymbol == '|' || northSymbol == '7' || northSymbol == 'F') {
+        startingCheckCoordinates.push([northCoordinate[0], northCoordinate[1]])
+      }
+    }
 
+    // checks south
+    if (startingCoordinates[1] <= columnHeight) {
+      let southCoordinate = [startingCoordinates[0], startingCoordinates[1] + 1]
+      console.log({ southCoordinate })
+      let southSymbol = finalGrid[southCoordinate[1]][southCoordinate[0]]
+      console.log(southSymbol)
+      if (southSymbol == '|' || southSymbol == 'L' || southSymbol == 'J') {
+        startingCheckCoordinates.push([southCoordinate[0], southCoordinate[1]])
+      }
+    }
+
+    // checks east
+    // change x value to be -1 if z >=1
+
+    // checks west
+    // change x value to be +1 if z < rowLength
+
+    console.log({ startingCheckCoordinates })
     // for (let i = 0; i < matrix.length; i++) {}
 
     /**
@@ -53,7 +93,8 @@ class Day10 extends Problem {
      *  - Then we can take the length and divide it by 2
      */
 
-    return grid.findLoopLength()
+    return 0
+    // return grid.findLoopLength()
   }
 
   // solvePart2() {
